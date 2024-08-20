@@ -3,6 +3,7 @@ package pthu.metaheuristics;
 import pthu.Instance;
 import pthu.Solution;
 import pthu.entities.ClassOffer;
+import pthu.entities.Classroom;
 import pthu.entities.utils.AllocationPoint;
 
 public class Restricter {
@@ -11,8 +12,8 @@ public class Restricter {
      * Restrições Fortes
      */ 
      
+
     public static boolean checkProfessorConflicts(Instance instance, Solution solution, AllocationPoint point, ClassOffer offer) {
-        
     	int timetabling[][][] = solution.getTimetabling();
     	boolean hasConflict = false;
     	
@@ -33,15 +34,14 @@ public class Restricter {
         return hasConflict;
     }
 
-    public static boolean checkClassConflicts() {
-        // Verifica conflitos de turma
-        // Retorna a quantidade de conflitos encontrados
-        return false;
+    public static boolean checkClassConflicts(Instance instance, Solution solution, AllocationPoint point, ClassOffer offer) {
+    	// uma turma não poderá assistir a mais de uma aula no mesmo dia e horário;
+    	// Ofertas incluem uma lista de turmas. Elaborar uma forma de representar isso na solução
+    	return false;
     }
 
     public static boolean checkClassroomConflicts() {
-        // Verifica conflitos de sala
-        // Retorna a quantidade de conflitos encontrados
+        // O fluxo de implementação já impede que a sala esteja alocada para duas aulas ao mesmo tempo
         return false;
     }
 
@@ -51,16 +51,16 @@ public class Restricter {
         return false;
     }
 
-    public static boolean checkClassroomCapacity() {
-        // Verifica a capacidade da sala
-        // Retorna a quantidade de conflitos encontrados
-        return false;
+    public static boolean checkClassroomCapacity(Instance instance, AllocationPoint point, ClassOffer offer) {
+    	Classroom classroom = instance.getClassrooms().get(point.classId);
+
+    	return offer.getStudentsPerClass() > classroom.getCapacity();
     }
 
-    public static boolean checkClassroomType() {
-        // Verifica o tipo de sala
-        // Retorna a quantidade de conflitos encontrados
-        return false;
+    public static boolean checkClassroomType(Instance instance, AllocationPoint point, ClassOffer offer){
+    	Classroom classroom = instance.getClassrooms().get(point.classId);
+
+    	return offer.getType() != classroom.getType();
     }
 
     public static boolean checkSpecialSubjects() {
@@ -75,61 +75,61 @@ public class Restricter {
      */
 
     // Métodos de verificação de restrições fracas
-    public int minimizeTeacherWorkingDays() {
+    public static int minimizeTeacherWorkingDays() {
         // Minimiza o intervalo de trabalho do professor
         // Retorna a quantidade de conflitos encontrados
         return 0;
     }
 
-    public int minimizeClassGaps() {
+    public static int minimizeClassGaps() {
         // Minimiza janelas de horário
         // Retorna a quantidade de conflitos encontrados
         return 0;
     }
 
-    public int minimizePreferredPeriod() {
+    public static int minimizePreferredPeriod() {
         // Minimiza disciplinas ofertadas fora do período preferencial
         // Retorna a quantidade de conflitos encontrados
         return 0;
     }
 
-    public int avoidSequentialClasses() {
+    public static int avoidSequentialClasses() {
         // Evita aulas seguidas da mesma disciplina
         // Retorna a quantidade de conflitos encontrados
         return 0;
     }
 
-    public int minimizeNightToMorningTransitions() {
+    public static int minimizeNightToMorningTransitions() {
         // Minimiza transições de aulas noturnas para diurnas
         // Retorna a quantidade de conflitos encontrados
         return 0;
     }
 
-    public int avoidSequentialDifficultClasses() {
+    public static int avoidSequentialDifficultClasses() {
         // Evita aulas difíceis em horários sequenciais
         // Retorna a quantidade de conflitos encontrados
         return 0;
     }
 
-    public int avoidDifficultClassesAtLastPeriod() {
+    public static int avoidDifficultClassesAtLastPeriod() {
         // Evita aulas difíceis no último horário do dia
         // Retorna a quantidade de conflitos encontrados
         return 0;
     }
 
-    public int avoidEvenHourClassesAtFirstPeriod() {
+    public static int avoidEvenHourClassesAtFirstPeriod() {
         // Evita aulas com carga horária par no primeiro horário do dia
         // Retorna a quantidade de conflitos encontrados
         return 0;
     }
 
-    public int avoidClassesAroundLunch() {
+    public static int avoidClassesAroundLunch() {
         // Evita aulas imediatamente antes ou depois do horário de almoço
         // Retorna a quantidade de conflitos encontrados
         return 0;
     }
 
-    public int avoidNonStandardStartTimes() {
+    public static int avoidNonStandardStartTimes() {
         // Evita aulas com início fora do horário padrão
         // Retorna a quantidade de conflitos encontrados
         return 0;

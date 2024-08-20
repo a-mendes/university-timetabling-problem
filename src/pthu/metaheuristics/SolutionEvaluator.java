@@ -58,83 +58,18 @@ public class SolutionEvaluator {
         /**
          *  Restrições Fracas
          */
-        weakRestrictions[0] = minimizeTeacherWorkingDays();
-        weakRestrictions[1] = minimizeClassGaps();
-        weakRestrictions[2] = minimizePreferredPeriod();
-        weakRestrictions[3] = avoidSequentialClasses();
-        weakRestrictions[4] = minimizeNightToMorningTransitions();
-        weakRestrictions[5] = avoidSequentialDifficultClasses();
-        weakRestrictions[6] = avoidDifficultClassesAtLastPeriod();
-        weakRestrictions[7] = avoidEvenHourClassesAtFirstPeriod();
-        weakRestrictions[8] = avoidClassesAroundLunch();
-        weakRestrictions[9] = avoidNonStandardStartTimes();
+        weakRestrictions[0] = Restricter.minimizeTeacherWorkingDays();
+        weakRestrictions[1] = Restricter.minimizeClassGaps();
+        weakRestrictions[2] = Restricter.minimizePreferredPeriod();
+        weakRestrictions[3] = Restricter.avoidSequentialClasses();
+        weakRestrictions[4] = Restricter.minimizeNightToMorningTransitions();
+        weakRestrictions[5] = Restricter.avoidSequentialDifficultClasses();
+        weakRestrictions[6] = Restricter.avoidDifficultClassesAtLastPeriod();
+        weakRestrictions[7] = Restricter.avoidEvenHourClassesAtFirstPeriod();
+        weakRestrictions[8] = Restricter.avoidClassesAroundLunch();
+        weakRestrictions[9] = Restricter.avoidNonStandardStartTimes();
 	}
-	
-	
-       
-    /**
-     * Restrições Fracas
-     */
-
-    // Métodos de verificação de restrições fracas
-    private int minimizeTeacherWorkingDays() {
-        // Minimiza o intervalo de trabalho do professor
-        // Retorna a quantidade de conflitos encontrados
-        return 0;
-    }
-
-    private int minimizeClassGaps() {
-        // Minimiza janelas de horário
-        // Retorna a quantidade de conflitos encontrados
-        return 0;
-    }
-
-    private int minimizePreferredPeriod() {
-        // Minimiza disciplinas ofertadas fora do período preferencial
-        // Retorna a quantidade de conflitos encontrados
-        return 0;
-    }
-
-    private int avoidSequentialClasses() {
-        // Evita aulas seguidas da mesma disciplina
-        // Retorna a quantidade de conflitos encontrados
-        return 0;
-    }
-
-    private int minimizeNightToMorningTransitions() {
-        // Minimiza transições de aulas noturnas para diurnas
-        // Retorna a quantidade de conflitos encontrados
-        return 0;
-    }
-
-    private int avoidSequentialDifficultClasses() {
-        // Evita aulas difíceis em horários sequenciais
-        // Retorna a quantidade de conflitos encontrados
-        return 0;
-    }
-
-    private int avoidDifficultClassesAtLastPeriod() {
-        // Evita aulas difíceis no último horário do dia
-        // Retorna a quantidade de conflitos encontrados
-        return 0;
-    }
-
-    private int avoidEvenHourClassesAtFirstPeriod() {
-        // Evita aulas com carga horária par no primeiro horário do dia
-        // Retorna a quantidade de conflitos encontrados
-        return 0;
-    }
-
-    private int avoidClassesAroundLunch() {
-        // Evita aulas imediatamente antes ou depois do horário de almoço
-        // Retorna a quantidade de conflitos encontrados
-        return 0;
-    }
-
-    private int avoidNonStandardStartTimes() {
-        // Evita aulas com início fora do horário padrão
-        // Retorna a quantidade de conflitos encontrados
-        return 0;
-    }
+    
+  
 }
    

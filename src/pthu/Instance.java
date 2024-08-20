@@ -23,16 +23,24 @@ public class Instance {
     private final int STRONG_RESTRICTIONS = 7;
     private final int WEAK_RESTRICTIONS = 10;
     
+    private final int DAYS_OF_WEEK;
+    private final int SCHEDULES;
+    private final int CLASSROOMS; 
+    
     private int nClassrooms;
     private int nSubjects;
     private int nProfessors;
     private int nClasses;
     private int nClassOffers;
     private int nSchedules;
-
+    
     
     public Instance(String pathClassrooms, String pathSubjects, String pathProfessors, String pathClasses, String pathOffer, String pathSchedule) {
         loadData(pathClassrooms, pathSubjects, pathProfessors, pathClasses, pathOffer, pathSchedule);
+        
+        this.DAYS_OF_WEEK = 5; // Considerando uma semana de 5 dias úteis
+        this.SCHEDULES = nSchedules;
+        this.CLASSROOMS = nClassrooms;
     }
 
     private void loadData(String pathClassrooms, String pathSubjects, String pathProfessors, String pathClasses, String pathOffer, String pathSchedule) {
@@ -166,5 +174,19 @@ public class Instance {
 	public int getnSchedules() {
 		return nSchedules;
 	}
+
+	public int getDAYS_OF_WEEK() {
+		return DAYS_OF_WEEK;
+	}
+
+	public int getSCHEDULES() {
+		return SCHEDULES;
+	}
+
+	public int getCLASSROOMS() {
+		return CLASSROOMS;
+	}
+	
+	
 
 }

@@ -1,13 +1,14 @@
 package pthu.entities;
 
-import pthu.entities.enums.ClassroomEnum;
-import pthu.entities.enums.ShiftEnum;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+
+import pthu.entities.enums.ClassroomEnum;
+import pthu.entities.enums.ShiftEnum;
 
 public class ClassOffer {
 
@@ -33,8 +34,8 @@ public class ClassOffer {
         this.classHrs = classHrs;
     }
 
-    public static List<ClassOffer> readClassOffersFromFile(String fileName) {
-        List<ClassOffer> classOffers = new ArrayList<>();
+    public static Map<Integer, ClassOffer> readClassOffersFromFile(String fileName) {
+        Map<Integer, ClassOffer> classOffersMap = new HashMap<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String line;
@@ -56,17 +57,17 @@ public class ClassOffer {
                 int professorId = Integer.parseInt(parts[5 + numberClasses]);
                 int typeCode = Integer.parseInt(parts[6 + numberClasses]);
                 ClassroomEnum type = (typeCode == 0) ? ClassroomEnum.CLASSROOM : ClassroomEnum.LABORATORY;
-                
+
                 int classHrs = Integer.parseInt(parts[7 + numberClasses]);
 
                 ClassOffer classOffer = new ClassOffer(id, subjectId, numberClasses, classes, studentsPerClass, shift, professorId, type, classHrs);
-                classOffers.add(classOffer);
+                classOffersMap.put(id, classOffer);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return classOffers;
+        return classOffersMap;
     }
 
 	public int getId() {

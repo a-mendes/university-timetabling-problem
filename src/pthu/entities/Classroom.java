@@ -11,14 +11,16 @@ import pthu.entities.enums.ClassroomEnum;
 public class Classroom {
 
 	private int id;
+	private int classroomNumber;
 	private String building;
 	private ClassroomEnum type;
 	private int capacity;
 	
-    public Classroom(int id, String building, ClassroomEnum type, int capacity) {
+    public Classroom(int id, String building, ClassroomEnum type, int classroomNumber, int capacity) {
         this.id = id;
         this.building = building;
         this.type = type;
+        this.classroomNumber = classroomNumber;
         this.capacity = capacity;
     }
 
@@ -29,13 +31,14 @@ public class Classroom {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split("\\s+");
+                int id = Integer.parseInt(parts[0]);
                 String building = parts[1];
                 int typeValue = Integer.parseInt(parts[2]);
                 ClassroomEnum type = (typeValue == 0) ? ClassroomEnum.CLASSROOM : ClassroomEnum.LABORATORY;
-                int id = Integer.parseInt(parts[3]);
+                int classroomNumber = Integer.parseInt(parts[3]);
                 int capacity = Integer.parseInt(parts[4]);
 
-                Classroom classroom = new Classroom(id, building, type, capacity);
+                Classroom classroom = new Classroom(id, building, type, classroomNumber, capacity);
                 classrooms.add(classroom);
             }
         } catch (IOException e) {
@@ -68,6 +71,14 @@ public class Classroom {
 	public void setType(ClassroomEnum type) {
 		this.type = type;
 	}
+	
+	public int getClassroomNumber() {
+		return classroomNumber;
+	}
+
+	public void setClassroomNumber(int classroomNumber) {
+		this.classroomNumber = classroomNumber;
+	}
 
 	public int getCapacity() {
 		return capacity;
@@ -79,7 +90,8 @@ public class Classroom {
 
 	@Override
 	public String toString() {
-		return "Classroom [id=" + id + ", building=" + building + ", type=" + type + ", capacity=" + capacity + "]";
+		return "Classroom [id=" + id + ", classroomNumber=" + classroomNumber + ", building=" + building + ", type="
+				+ type + ", capacity=" + capacity + "]";
 	}
 	
 }

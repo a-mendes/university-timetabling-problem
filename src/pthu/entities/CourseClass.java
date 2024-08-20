@@ -25,8 +25,6 @@ public class CourseClass {
 
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String line;
-            br.readLine();
-
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split("\\s+");
                 int id = Integer.parseInt(parts[0]);

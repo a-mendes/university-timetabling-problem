@@ -40,7 +40,7 @@ public class Solution {
                 System.out.print(j + "h" + "\t");
                 for (int k = 0; k < instance.getDAYS_OF_WEEK(); k++) {
                 	if(timetabling[i][j][k] >= 0)
-                		System.out.print(timetabling[i][j][k] + "\t");
+                		System.out.print("C"+timetabling[i][j][k]+"." + "\t");
                 	else
                 		System.out.print(" - \t");
                 }
@@ -52,9 +52,10 @@ public class Solution {
     
     public boolean canAllocate(Instance instance, AllocationPoint point, ClassOffer offer) {
 		
-    	if(point.scheduleId + offer.getClassHrs() -1 > instance.getSCHEDULES())
+    	if(point.scheduleId + offer.getClassHrs() > instance.getSCHEDULES())
     		return false;
-    	
+
+
     	for (int i = 0; i < offer.getClassHrs(); i++) {
 	        AllocationPoint auxPoint = new AllocationPoint(point.classId, point.scheduleId + i, point.dayId);
 	        boolean cantAllocate = Restricter.hasClassroomConflicts(instance, this, auxPoint)
@@ -76,8 +77,6 @@ public class Solution {
     public void allocate(AllocationPoint point, ClassOffer offer) {
 		for (int i = 0; i < offer.getClassHrs(); i++) 
 			timetabling[point.classId][point.scheduleId+i][point.dayId] = offer.getId();
-		
-		printTimetabling();
 	}
     
 	public int[][][] getTimetabling() {

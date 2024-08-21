@@ -35,9 +35,7 @@ public class ConstructiveHeuristic {
 
 			for (int dayId = 0; dayId < instance.getDAYS_OF_WEEK(); dayId++) {
 				for (int scheduleId = validScheduleBegin; scheduleId < validScheduleEnd; scheduleId++) {
-					do {
-						int classId = random.nextInt((validClassroomEnd - validClassroomBegin) + 1)
-								+ validClassroomBegin;
+					for (int classId = validClassroomBegin; classId < validClassroomEnd; classId++) {
 
 						AllocationPoint point = new AllocationPoint(classId, scheduleId, dayId);
 
@@ -45,8 +43,8 @@ public class ConstructiveHeuristic {
 							solution.allocate(point, offer);
 							allocated = true;
 						}
-					} while (!allocated);
-					
+					}
+
 					if (allocated)
 						break;
 				}

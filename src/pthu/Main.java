@@ -1,5 +1,7 @@
 package pthu;
 
+import pthu.metaheuristics.ConstructiveHeuristic;
+
 public class Main {
 
 	private final String PATH_FOLDER = "res/instance/";
@@ -19,7 +21,8 @@ public class Main {
 
 		main.loadInstance();
 		main.generateSolution();
-
+		
+		System.out.println("----- END ------");
 	}
 
 	private void loadInstance() {
@@ -31,7 +34,8 @@ public class Main {
 	private void generateSolution() {
 		solution = new Solution(instance);
 
-		//Chamar construtivo
+		ConstructiveHeuristic constructive = new ConstructiveHeuristic();
+		solution = constructive.constructSolution(instance);
 		solution.printTimetabling();
 	}
 }

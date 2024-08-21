@@ -13,7 +13,7 @@ public class Restricter {
      */ 
      
 
-    public static boolean checkProfessorConflicts(Instance instance, Solution solution, AllocationPoint point, ClassOffer offer) {
+    public static boolean hasProfessorConflicts(Instance instance, Solution solution, AllocationPoint point, ClassOffer offer) {
     	int timetabling[][][] = solution.getTimetabling();
     	boolean hasConflict = false;
     	
@@ -26,44 +26,43 @@ public class Restricter {
 			ClassOffer offerAlocated = instance.getClassOffers().get(idOfferAllocated);
 			
 			if(offer.getProfessorId() == offerAlocated.getProfessorId()) {
-				hasConflict = true;
-				break;
+				return hasConflict = true;
 			}
 		}
     	
         return hasConflict;
     }
 
-    public static boolean checkClassConflicts(Instance instance, Solution solution, AllocationPoint point, ClassOffer offer) {
-    	// uma turma não poderá assistir a mais de uma aula no mesmo dia e horário;
-    	// Ofertas incluem uma lista de turmas. Elaborar uma forma de representar isso na solução
-    	return false;
+    public static boolean hasClassroomConflicts(Instance instance, Solution solution, AllocationPoint point) {
+    	int timetabling[][][] = solution.getTimetabling();
+    	boolean hasConflict = timetabling[point.classId][point.scheduleId][point.dayId] >= 0;
+		
+		return hasConflict;
     }
 
-    public static boolean checkClassroomConflicts() {
-        // O fluxo de implementação já impede que a sala esteja alocada para duas aulas ao mesmo tempo
+    public static boolean hasClassConflicts() {
         return false;
     }
 
-    public static boolean checkShiftConflicts() {
+    public static boolean hasShiftConflicts() {
         // Verifica se as aulas estão sendo alocadas fora do turno da oferta
         // Retorna a quantidade de conflitos encontrados
         return false;
     }
 
-    public static boolean checkClassroomCapacity(Instance instance, AllocationPoint point, ClassOffer offer) {
+    public static boolean hasClassroomCapacity(Instance instance, AllocationPoint point, ClassOffer offer) {
     	Classroom classroom = instance.getClassrooms().get(point.classId);
 
     	return offer.getStudentsPerClass() > classroom.getCapacity();
     }
 
-    public static boolean checkClassroomType(Instance instance, AllocationPoint point, ClassOffer offer){
+    public static boolean hasClassroomType(Instance instance, AllocationPoint point, ClassOffer offer){
     	Classroom classroom = instance.getClassrooms().get(point.classId);
 
     	return offer.getType() != classroom.getType();
     }
 
-    public static boolean checkSpecialSubjects() {
+    public static boolean isSpecialSubjects() {
         // Verifica disciplinas especiais
         // Retorna a quantidade de conflitos encontrados
         return false;

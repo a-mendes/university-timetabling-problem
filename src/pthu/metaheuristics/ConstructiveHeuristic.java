@@ -33,29 +33,22 @@ public class ConstructiveHeuristic {
 			int validClassroomBegin = (type == ClassroomEnum.CLASSROOM) ? (0) : (8);
 			int validClassroomEnd = (type == ClassroomEnum.CLASSROOM) ? (7) : (13);
 
-			for (int dayId = 0; dayId < instance.getDAYS_OF_WEEK(); dayId++) {
-				for (int scheduleId = validScheduleBegin; scheduleId < validScheduleEnd; scheduleId++) {
-					for (int classId = validClassroomBegin; classId < validClassroomEnd; classId++) {
-
-						AllocationPoint point = new AllocationPoint(classId, scheduleId, dayId);
-
-						if (solution.canAllocate(instance, point, offer)) {
-							solution.allocate(point, offer);
-							allocated = true;
-						}
-					}
-
-					if (allocated)
+			do {
+				// Gera um dia aleatório e um horário aleatório dentro dos intervalos válidos
+				int dayId = random.nextInt(instance.getDAYS_OF_WEEK());
+				int scheduleId = random.nextInt(validScheduleEnd - validScheduleBegin) + validScheduleBegin;
+				
+				for (int classId = validClassroomBegin; classId < validClassroomEnd; classId++) {
+					AllocationPoint point = new AllocationPoint(classId, scheduleId, dayId);
+					
+					if (solution.canAllocate(instance, point, offer)) {
+						solution.allocate(point, offer);
+						allocated = true;
 						break;
+					}
 				}
-				if (allocated)
-					break;
-			}
-
-			if (!allocated) {
-				System.out.println("Warning: Offer " + offer.getId() + " could not be allocated.");
-			}
-		}
+			} while (!allocated);
+	    }
 
 		return solution;
 
